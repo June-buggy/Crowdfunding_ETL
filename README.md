@@ -1,6 +1,6 @@
 # Python Rutgers Bootcamp Challenge - ETL Challenge 
 
-This activity is broken down into two deliverables, WeatherPy and VacationPy.
+This activity is broken down into multiple deliverables to include creation of a dataframe for Category, Subcategory, Campaign, Contacts, and the creation of a database called Crowdfunding. 
 
 ## Description
 
