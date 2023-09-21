@@ -30,25 +30,100 @@ For the ETL mini project, you will work with a partner to practice building an E
 
 ![Screenshot 2023-09-21 093750](https://github.com/Connextstrategy/Crowdfunding_ETL/assets/18508699/8af6dce6-7260-4f75-9438-75b77ee5d7e4)
 
+4. Export the subcategory DataFrame as subcategory.csv and save it to your GitHub repository.
+
+## Create the Campaign DataFrame
+
+1. Extract and transform the crowdfunding.xlsx Excel data to create a campaign DataFrame has the following columns:
+
+* The "cf_id" column
+
+* The "contact_id" column
+
+* The "company_name" column
+
+* The "blurb" column, renamed to "description"
+
+* The "goal" column, converted to the float data type
+
+* The "pledged" column, converted to the float data type
+
+* The "outcome" column
+
+* The "backers_count" column
+
+* The "country" column
+
+* The "currency" column
+
+* The "launched_at" column, renamed to "launch_date" and with the UTC times converted to the datetime format
+
+* The "deadline" column, renamed to "end_date" and with the UTC times converted to the datetime format
+
+* The "category_id" column, with unique identification numbers matching those in the "category_id" column of the category DataFrame
+
+* The "subcategory_id" column, with the unique identification numbers matching those in the "subcategory_id" column of the subcategory DataFrame
+
+* The following image shows this campaign DataFrame:
+
+![Screenshot 2023-09-21 094100](https://github.com/Connextstrategy/Crowdfunding_ETL/assets/18508699/8e1c0a91-35fd-40ab-a2f0-f16edafae976)
+
+## Create the Contacts DataFrame
+
+1. Choose one of the following two options for extracting and transforming the data from the contacts.xlsx Excel data:
+
+* Option 1: Use Python dictionary methods.
+
+* Option 2: Use regular expressions.
+
+2. If you chose Option 1, complete the following steps:
+
+* Import the contacts.xlsx file into a DataFrame.
+* Iterate through the DataFrame, converting each row to a dictionary.
+* Iterate through each dictionary, doing the following:
+      - Extract the dictionary values from the keys by using a Python list comprehension.
+        - Add the values for each row to a new list.
+* Create a new DataFrame that contains the extracted data.
+* Split each "name" column value into a first and last name, and place each in a new column.
+* Clean and export the DataFrame as contacts.csv and save it to your GitHub repository.
+
+3. If you chose Option 2, complete the following steps:
+
+* Import the contacts.xlsx file into a DataFrame.
+* Extract the "contact_id", "name", and "email" columns by using regular expressions.
+* Create a new DataFrame with the extracted data.
+* Convert the "contact_id" column to the integer type.
+* Split each "name" column value into a first and a last name, and place each in a new column.
+* Clean and then export the DataFrame as contacts.csv and save it to your GitHub repository.
+
+![Screenshot 2023-09-21 094327](https://github.com/Connextstrategy/Crowdfunding_ETL/assets/18508699/82141ee8-a406-45eb-8aed-1a39ebd0f491)
+
+## Create the Campaign DataFrame
+
+1. Inspect the four CSV files, and then sketch an ERD of the tables by using QuickDBDLinks to an external site..
+
+2. Use the information from the ERD to create a table schema for each CSV file.
+
+- Note: Remember to specify the data types, primary keys, foreign keys, and other constraints.
+
+3. Save the database schema as a Postgres file named crowdfunding_db_schema.sql, and save it to your GitHub repository.
+
+4. Create a new Postgres database, named crowdfunding_db.
+
+5. Using the database schema, create the tables in the correct order to handle the foreign keys.
+
+6. Verify the table creation by running a SELECT statement for each table.
+
+7. Import each CSV file into its corresponding SQL table.
+
+8. Verify that each table has the correct data by running a SELECT statement for each.
+
 ### Dependencies
 
-
-## Import APIs from OpenWeatherMap API & citipy to determine the cities based on latitude and longitude for WeatherPY
-
 * Using Jupyter Notebooks or Visual Studio Code for coding and data visualizations
-
-* *WeatherPY
-* import matplotlib.pyplot as plt
 * import pandas as pd
 * import numpy as np
-* import requests
-* import time
-* from scipy.stats import linregress
-
-## Import APIs from GEOAPIFY for VacationPY
-* import hvplot.pandas
-* import pandas as pd
-* import requests
+* import re
 
 ### Installing
 
@@ -56,27 +131,23 @@ For the ETL mini project, you will work with a partner to practice building an E
 
 ## Help
 
-The city data that you generate is based on random coordinates and different query times, so your outputs will not be an exact match to the provided starter notebook.
+* To split each "category & sub-category" column value into "category" and "subcategory" column values, use df[["new_column1","new_column2"]] = df["column"].str.split(). Make sure to pass the correct parameters to the split() function.
 
-If you'd like a refresher on the geographic coordinate system, this siteLinks to an external site. has great information.
+* To get the unique category and subcategory values from the "category" and "subcategory" columns, create a NumPy array where the array length equals the number of unique categories and unique subcategories from each column. For information about how to do so, see numpy.arangeLinks to an external site. in the NumPy documentation.
 
-Take some time to study the OpenWeatherMap API. Based on your initial study, you should be able to answer basic questions about the API: Where do you request the API key? Which Weather API in particular will you need? What URL endpoints does it expect? What JSON structure does it respond with? Before you write a line of code, you should have a crystal-clear understanding of your intended outcome.
+* To create the category and subcategory identification numbers, use a list comprehension to add the "cat" string or the "subcat" string to each number in the category or the subcategory array, respectively.
 
-A starter code for citipy has been provided. However, if you're craving an extra challenge, push yourself to learn how it works by using the citipy Python libraryLinks to an external site.. Before you try to incorporate the library in your analysis, start with simple test cases outside of your main script to confirm that you are using it correctly. Often, when introduced to a new library, learners spend hours trying to figure out errors in their code when a simple test case can save you a lot of time and frustration.
+* For more information about creating a new Pandas DataFrame, see the pandas.DataFrameLinks to an external site. in the Pandas documentation.
 
-You will need to apply your critical thinking skills to understand how and why we're recommending these tools. What is citipy used for? Why would you use it in conjunction with the OpenWeatherMap API? How would you do so?
+* To convert the "goal" and "pledged" columns to the float data type, use the astype() method.
 
-While building your script, pay attention to the cities you are using in your query pool. Are you covering the full range of latitudes and longitudes? Or are you choosing 500 cities from one region of the world? Even if you were a geography genius, simply listing 500 cities based on your personal selection would create a biased dataset. Try to think of ways that you can counter these selection issues.
+* To convert the "launch_date" and "end_date" UTC times to the datetime format, see the Transform_Grocery_Orders_Solved.ipynb activity solution.
 
-      Hint: Consider the full range of latitudes.
-
-Once you have computed the linear regression for one relationship, you will follow a similar process for all other charts. Optionally, try to create a function that will create these charts based on different parameters. (Note: there will be no extra points for completing this.)
-
-Remember that each coordinate will trigger a separate call to the Google API. If you're creating your own criteria to plan your vacation, try to reduce the results in your DataFrame to 10 or fewer cities.
+* For more information about how to add the "category_id" and "subcategory_id" unique identification numbers to the campaign DataFrame, see the pandas.DataFrame.mergeLinks to an external site. in the Pandas documentation.
 
 ## Authors
 
-Christopher Manfredi 
+Christopher Manfredi, Brandon Mata, June Higgins
 
 ## Version History
 
