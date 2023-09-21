@@ -18,6 +18,18 @@ For the ETL mini project, you will work with a partner to practice building an E
 
 ![Screenshot 2023-09-21 093624](https://github.com/Connextstrategy/Crowdfunding_ETL/assets/18508699/439eae86-74cd-4d4a-b5bc-ec238213830a)
 
+2. Export the category DataFrame as category.csv and save it to your GitHub repository.
+
+3. Extract and transform the crowdfunding.xlsx Excel data to create a subcategory DataFrame that has the following columns:
+
+* A "subcategory_id" column that has entries going sequentially from "subcat1" to "subcatn", where n is the number of unique subcategories
+
+* A "subcategory" column that contains only the subcategory titles
+
+* The following image shows this subcategory DataFrame:
+
+![Screenshot 2023-09-21 093750](https://github.com/Connextstrategy/Crowdfunding_ETL/assets/18508699/8af6dce6-7260-4f75-9438-75b77ee5d7e4)
+
 ### Dependencies
 
 
