@@ -124,6 +124,8 @@ For the ETL mini project, you will work with a partner to practice building an E
 * import pandas as pd
 * import numpy as np
 * import re
+* from datetime import datetime as dt
+* import json
 
 ### Installing
 
